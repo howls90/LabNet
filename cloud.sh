@@ -13,7 +13,7 @@ if [ -z "$1" ]
 fi
 
 # Check if input is number
-if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 -a "$1" -le 254 ]
+if [ "$1" -ge 1 -a "$1" -le 254 ]
     then
     echo "Sorry integers from 1-254 only"
     exit 1
