@@ -1,9 +1,21 @@
 # Lab Network
 
 ## Installation
+
+### FrontEnd and RAU
 ```
-sudo chmod 777 cloud.sh
-sudo ./cloud.sh [subnet]
+sudo chmod 777 config.sh
+sudo ./config.sh 
+```
+### SmicroS
+```
+sudo chmod 777 config.sh
+sudo ./config.sh
+sudo su - stack
+git clone https://github.com/howls90/LabNet.git
+cd smicro
+chmod 777 devstack
+./devstack.sh
 ```
 
 ## Considerations
