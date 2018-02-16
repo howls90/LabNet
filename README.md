@@ -7,7 +7,7 @@
 sudo chmod 777 config.sh
 sudo ./config.sh 
 ```
-### SmicroS
+### Smicros
 ```
 sudo chmod 777 config.sh
 sudo ./config.sh
