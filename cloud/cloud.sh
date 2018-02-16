@@ -29,15 +29,6 @@ sudo apt-get install git -y
 sudo useradd -s /bin/bash -d /opt/stack -m stack
 echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
 
-# Devstack
-sudo -u stack bash << EOF
-git clone https://git.openstack.org/openstack-dev/devstack
-cd devstack
-mv $PATH/files/local.conf .
-sed -i 's/20/$1/g' "local.conf"
-./stack.sh
-EOF
-
 # Firewall configuration
 sed -i -e '$i \sudo iptables -t nat -I POSTROUTING -o ib0 -s $1.0.0.0/24 -j MASQUERADE &\n' rc.local
 sed -i -e '$i \sudo iptables -I FORWARD -s $1.0.0.0/24 -j ACCEPT &\n' rc.local
