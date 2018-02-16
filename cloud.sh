@@ -9,17 +9,19 @@ fi
 if [ -z "$1" ]
     then
     echo "No subnet provided, exemple: 1~254 number"
+    exit 1
 fi
 
 # Check if input is number
 if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 -a "$1" -le 254 ]
     then
     echo "Sorry integers from 1-254 only"
+    exit 1
 fi
 
 # Update repositories and install packages
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install git
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get install git -y
 
 # Create stack user
 sudo useradd -s /bin/bash -d /opt/stack -m stack
