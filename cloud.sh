@@ -6,6 +6,11 @@ if ! [ $(id -u) = 0 ]; then
     exit 1
 fi
 
+if [ -z "$1" ]
+    then
+    echo "No subnet provided, exemple: 1~254 number"
+fi
+
 # Check if input is number
 if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 -a "$1" -le 254 ]
     then
