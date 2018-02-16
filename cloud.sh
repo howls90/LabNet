@@ -19,6 +19,8 @@ if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 -a "$1" -le 254 ]
     exit 1
 fi
 
+PATH = $(pwd)
+
 # Update repositories and install packages
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install git -y
@@ -26,18 +28,15 @@ sudo apt-get install git -y
 # Create stack user
 sudo useradd -s /bin/bash -d /opt/stack -m stack
 echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
-sudo su - stack
 
-# Download Devstack
+# Devstack
+sudo -u stack bash << EOF
 git clone https://git.openstack.org/openstack-dev/devstack
 cd devstack
-
-# Configuration file
-mv files/local.conf .
+mv $PATH/files/local.conf .
 sed -i 's/20/$1/g' "local.conf"
-
-# Run stack
 ./stack.sh
+EOF
 
 # Firewall configuration
 sed -i -e '$i \sudo iptables -t nat -I POSTROUTING -o ib0 -s $1.0.0.0/24 -j MASQUERADE &\n' rc.local
